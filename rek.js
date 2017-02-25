@@ -31,7 +31,6 @@ var params = {
                                       });
  
  // compare faces
-
  function compareFaces() {
 
    rekognition.compareFaces(params, function(err, data) {

@@ -9,27 +9,35 @@
 
 <body>
 	<h1>Fun with AWS Rekognition</h1>
-	
+
+	<h3>Face Validation</h3>
+	<p>Take a picture. Match it to an existing picture. (not working yet)</p>
+
 	<video id="video"></video>
 	<canvas id="canvas" style="display:none;"></canvas>
 	<div id="buttoncontent"></div>
-
 	<button id="startbutton">Capture Images</button>
+	
+	<hr>
+
+	<h3>Match 2 Existing Faces</h3>
+	<p>Compare two existing face images on S3.</p>
+
+	<div>
+		<img id="sourceImage" width="200" src="http://placehold.it/200x200">
+		<img id="targetImage" width="200" src="http://placehold.it/200x200">
+	</div>
+
 	<button id="comparebutton" onclick="compareFaces();">Compare Faces</button>
 
 	<br>
 
 	<div>
-		<p id="results">Results = 100</p>
+		<p id="results">Results = ??</p>
 	</div>
 
 	<div>
 		<p id="Labelresults"></p>
-	</div>
-
-	<div>
-		<img id="sourceImage" width="200" src="http://fillmurray.com/200/200">
-		<img id="targetImage" width="200" src="http://fillmurray.com/200/200">
 	</div>
 
 	<script src="secrets.js"></script>
