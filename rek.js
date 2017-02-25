@@ -81,7 +81,7 @@ var params = {
 // could be used for detect labels rekognition function 
 // not yet working
 
-/*  
+
 var thirdParams = {
   Image: {
     S3Object: {
@@ -89,31 +89,34 @@ var thirdParams = {
       Name: yourImageForLabelsName
     }
   },
-  MaxLabels: 123,
+  MaxLabels: 10,
   MinConfidence: 70
 };
-*/ 
 
- // rekognition.detectLabels(secondParams, function(err, data) {
- //   if (err)
- //   {
- //     console.log(err, err.stack); // an error occurred
- //   }
- //   else
- //   {
- //     console.log(data);           // successful response
- //     var test = data.Labels;
- //     var string = '';
- //     for(var i=0; i< test.length; i++)
- //     {
- //       string += test[i].Confidence+" "+test[i].Name+"<br>";
- //       console.log(test[i].Confidence);
- //       console.log(test[i].Name);
- //     }
- //     document.getElementById("Labelresults").innerHTML = string;
- //   }
- // });
-
+function detectPictureLabels() {
+  rekognition.detectLabels(thirdParams, function(err, data) {
+   if (err)
+   {
+     console.log(err, err.stack); // an error occurred
+   }
+   else
+   {
+     // show the picture from S3 that you use to detect labels
+     document.getElementById("imageForLabelsName").src = "https://s3.amazonaws.com/" + thirdParams.Image.S3Object.Bucket + "/" + thirdParams.Image.S3Object.Name;
+     console.log(data);           // successful response
+     var labels = data.Labels;
+     var labelResults = "<ul>";
+     for(var i = 0; i < labels.length; i++)
+     {
+       labelResults += "<li>" + labels[i].Name + " - " + String(labels[i].Confidence).slice(0,5) + "%</li>";
+       console.log(labels[i].Name);
+       console.log(labels[i].Confidence);
+     }
+     labelResults += "</ul>";
+     document.getElementById("Labelresults").innerHTML = labelResults;
+   }
+  });
+}
 
 
 // Capture Image, currently this isn't saving the image

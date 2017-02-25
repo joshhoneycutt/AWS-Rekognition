@@ -36,9 +36,20 @@
 		<p id="results">Results = ??</p>
 	</div>
 
+	<hr>
+
+	<h3>Detect what's in a picture</h3>
+	<p>Show labels and confidence of a picture in S3.</p>
+
+	<div>
+		<img id="imageForLabelsName" width="200" src="http://placehold.it/200x200">
+	</div>
+
 	<div>
 		<p id="Labelresults"></p>
 	</div>
+
+	<button id="comparebutton" onclick="detectPictureLabels();">Detect Labels</button>
 
 	<script src="secrets.js"></script>
 	<script src="rek.js"></script>
