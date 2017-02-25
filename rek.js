@@ -10,15 +10,19 @@ var params = {
   TargetImage: {
    S3Object: {
      Bucket: "jj-rek2",
-     Name: "joe3.png"
+     Name: "joe2.jpg"
    }
   }
  };
+ 
+ // set up rekognition credentials
  var rekognition = new AWS.Rekognition({apiVersion: '2016-06-27',
                                         accessKeyId: myAccessKeyId,
                                         secretAccessKey: mySecretAccessKey, // these variables come from secrets.js
                                         region: myRegion
                                       });
+ 
+ // compare faces
  rekognition.compareFaces(params, function(err, data) {
    if (err)
    {
@@ -29,7 +33,11 @@ var params = {
      console.log(data);           // successful response
      console.log(data.FaceMatches);
      console.log(data.FaceMatches[0].Similarity);
+     // display the face match similarity
      document.getElementById("results").innerHTML = "Results = "+data.FaceMatches[0].Similarity+' Similarity';
+     // show the source and target images
+     document.getElementById("sourceImage").src = "https://s3.amazonaws.com/" + params.SourceImage.S3Object.Bucket + "/" + params.SourceImage.S3Object.Name;
+     document.getElementById("targetImage").src = "https://s3.amazonaws.com/" + params.TargetImage.S3Object.Bucket + "/" + params.TargetImage.S3Object.Name;
    }
  });
 
@@ -85,6 +93,10 @@ var params = {
  // });
 
 // Capture Image, currently this isn't saving the image
+// the intent here is to use the camera to take a picture of yourself
+// then compare to an image S3
+// like a face validation :) 
+
 (function()
 {
   var streaming = false,
@@ -93,7 +105,7 @@ var params = {
     buttoncontent = document.querySelector('#buttoncontent'),
     photo = document.querySelector('#photo'),
     startbutton = document.querySelector('#startbutton'),
-    width = 640,
+    width = 320,
     height = 0;
 
   navigator.getMedia = (navigator.getUserMedia ||
