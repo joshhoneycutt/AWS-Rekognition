@@ -17,6 +17,10 @@
 <div>
   <p id="results">Results = 0</p>
 </div>
+<div>
+  <p id="Labelresults"></p>
+</div>
+
 
 <script type="text/javascript">
 
@@ -25,14 +29,14 @@ var params = {
   SimilarityThreshold: 90,
   SourceImage: {
    S3Object: {
-    Bucket: "sandbox-test-dev",
-    Name: "josh1.jpg"
+    Bucket: "YOUR BUCKET NAME",
+    Name: "YOUR PHOTO NAME"
    }
   },
   TargetImage: {
    S3Object: {
-    Bucket: "sandbox-test-dev",
-    Name: "josh2.jpg"
+     Bucket: "YOUR BUCKET NAME",
+     Name: "YOUR SECOND PHOTO NAME"
    }
   }
  };
@@ -52,6 +56,57 @@ var params = {
      console.log(data.FaceMatches);
      console.log(data.FaceMatches[0].Similarity);
      document.getElementById("results").innerHTML = "Results = "+data.FaceMatches[0].Similarity+' Similarity';
+   }
+ });
+
+/* Not currently using
+ var secondParams = {
+  Image: {
+   S3Object: {
+     Bucket: "YOUR BUCKET NAME",
+     Name: "YOUR PHOTO NAME"
+   }
+  }
+ };
+ rekognition.detectFaces(secondParams, function(err, data) {
+   if (err)
+   {
+     console.log(err, err.stack); // an error occurred
+   }
+   else
+   {
+     console.log(data);           // successful response
+   }
+ });
+*/
+
+ var thirdParams = {
+  Image: {
+   S3Object: {
+     Bucket: "YOUR BUCKET NAME",
+     Name: "YOUR PHOTO NAME"
+   }
+  },
+  MaxLabels: 123,
+  MinConfidence: 70
+ };
+ rekognition.detectLabels(secondParams, function(err, data) {
+   if (err)
+   {
+     console.log(err, err.stack); // an error occurred
+   }
+   else
+   {
+     console.log(data);           // successful response
+     var test = data.Labels;
+     var string = '';
+     for(var i=0; i< test.length; i++)
+     {
+       string += test[i].Confidence+" "+test[i].Name+"<br>";
+       console.log(test[i].Confidence);
+       console.log(test[i].Name);
+     }
+     document.getElementById("Labelresults").innerHTML = string;
    }
  });
 
