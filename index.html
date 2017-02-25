@@ -8,11 +8,14 @@
 </head>
 
 <body>
+	<h1>Fun with AWS Rekognition</h1>
+	
 	<video id="video"></video>
 	<canvas id="canvas" style="display:none;"></canvas>
 	<div id="buttoncontent"></div>
 
-	<button id="startbutton">Capture</button>
+	<button id="startbutton">Capture Images</button>
+	<button id="comparebutton" onclick="compareFaces();">Compare Faces</button>
 
 	<br>
 
@@ -24,7 +27,7 @@
 		<p id="Labelresults"></p>
 	</div>
 
-	<div class="compare">
+	<div>
 		<img id="sourceImage" width="200" src="http://fillmurray.com/200/200">
 		<img id="targetImage" width="200" src="http://fillmurray.com/200/200">
 	</div>

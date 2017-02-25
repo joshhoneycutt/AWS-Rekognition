@@ -29,25 +29,32 @@ The region here should be the same as your S3 bucket.
 
 ## Upload pictures to S3
 
-Create an S3 bucket. Upload a couple pictures of yourself. Check out the [S3](http://aws.amazon.com/s3) documentation for how to do that.   
+Create an S3 bucket. Upload a couple pictures of yourself. Check out the [S3](http://aws.amazon.com/s3) documentation for how to do that. Make sure your S3 bucket is in the region you define in your secrets.js
 
+## Update S3 bucket and picture variables
+
+Update the variables at the top of rek.js with your own S3 bucket and 
+
+	const yourS3Bucket           = 'jj-rek2';
+	const yourSourceImageName    = 'joe1.jpg';
+	const yourTargetImageName    = 'joe2.jpg';
+	
 	var params = {
 	  SimilarityThreshold: 90,
 	  SourceImage: {
 	   S3Object: {
-	    Bucket: "YOUR_S3_BUCKET",
-	    Name: "YOUR_PICTURE_1.jpg"
+	    Bucket: yourS3Bucket,
+	    Name: yourSourceImageName
 	   }
 	  },
 	  TargetImage: {
 	   S3Object: {
-	     Bucket: "YOUR-S3-BUCKET",
-	     Name: "YOUR_PICTURE_2.jpg"
+	     Bucket: yourS3Bucket,
+	     Name: yourTargetImageName
 	   }
 	  }
 	 };
 
-Make sure your S3 bucket is in the region you define in your secrets.js
 
 ## Run the code 
 

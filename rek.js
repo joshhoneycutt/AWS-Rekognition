@@ -1,16 +1,24 @@
+// hard coded variables for S3 bucket and pictures
+// make sure pictures are set to public
+const yourS3Bucket           = 'jj-rek2';
+const yourSourceImageName    = 'joe1.jpg';
+const yourTargetImageName    = 'joe2.jpg';
+const yourImageForLabelsName = 'picture.jpg';
+
+
 // Connect to AWS
 var params = {
   SimilarityThreshold: 90,
   SourceImage: {
    S3Object: {
-    Bucket: "jj-rek2",
-    Name: "joe1.jpg"
+    Bucket: yourS3Bucket,
+    Name: yourSourceImageName
    }
   },
   TargetImage: {
    S3Object: {
-     Bucket: "jj-rek2",
-     Name: "joe2.jpg"
+     Bucket: yourS3Bucket,
+     Name: yourTargetImageName
    }
   }
  };
@@ -23,33 +31,42 @@ var params = {
                                       });
  
  // compare faces
- rekognition.compareFaces(params, function(err, data) {
-   if (err)
-   {
-     console.log(err, err.stack); // an error occurred
-   }
-   else
-   {
-     console.log(data);           // successful response
-     console.log(data.FaceMatches);
-     console.log(data.FaceMatches[0].Similarity);
-     // display the face match similarity
-     document.getElementById("results").innerHTML = "Results = "+data.FaceMatches[0].Similarity+' Similarity';
-     // show the source and target images
-     document.getElementById("sourceImage").src = "https://s3.amazonaws.com/" + params.SourceImage.S3Object.Bucket + "/" + params.SourceImage.S3Object.Name;
-     document.getElementById("targetImage").src = "https://s3.amazonaws.com/" + params.TargetImage.S3Object.Bucket + "/" + params.TargetImage.S3Object.Name;
-   }
- });
 
-/* Not currently using
+ function compareFaces() {
+
+   rekognition.compareFaces(params, function(err, data) {
+     if (err)
+     {
+       console.log(err, err.stack); // an error occurred
+     }
+     else
+     {
+       console.log(data);           // successful response
+       console.log(data.FaceMatches);
+       console.log(data.FaceMatches[0].Similarity);
+       // display the face match similarity
+       document.getElementById("results").innerHTML = "Results = "+data.FaceMatches[0].Similarity+' Similarity';
+       // show the source and target images
+       // make sure pictures are set to public
+       document.getElementById("sourceImage").src = "https://s3.amazonaws.com/" + params.SourceImage.S3Object.Bucket + "/" + params.SourceImage.S3Object.Name;
+       document.getElementById("targetImage").src = "https://s3.amazonaws.com/" + params.TargetImage.S3Object.Bucket + "/" + params.TargetImage.S3Object.Name;
+     }
+   });
+
+  };
+
+// could be used for detect faces rekognition function
+// not yet working 
+/*
  var secondParams = {
   Image: {
    S3Object: {
-     Bucket: "YOUR S3 BUCKET NAME",
-     Name: "YOUR PHOTO NAME"
+     Bucket: yourS3Bucket,
+     Name: yourSourceImageName
    }
   }
  };
+ 
  rekognition.detectFaces(secondParams, function(err, data) {
    if (err)
    {
@@ -62,16 +79,22 @@ var params = {
  });
 */
 
- var thirdParams = {
+// could be used for detect labels rekognition function 
+// not yet working
+
+/*  
+var thirdParams = {
   Image: {
-   S3Object: {
-     Bucket: "jj-rek2",
-     Name: "picture.jpg"
-   }
+    S3Object: {
+      Bucket: yourS3Bucket,
+      Name: yourImageForLabelsName
+    }
   },
   MaxLabels: 123,
   MinConfidence: 70
- };
+};
+*/ 
+
  // rekognition.detectLabels(secondParams, function(err, data) {
  //   if (err)
  //   {
@@ -91,6 +114,8 @@ var params = {
  //     document.getElementById("Labelresults").innerHTML = string;
  //   }
  // });
+
+
 
 // Capture Image, currently this isn't saving the image
 // the intent here is to use the camera to take a picture of yourself
