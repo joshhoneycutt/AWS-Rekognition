@@ -1,49 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-      <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.20.min.js"></script>
-</head>
-
-<body>
-<video id="video"></video>
-<canvas id="canvas" style="display:none;"></canvas>
-<div id="buttoncontent">
-
-</div>
-<button id="startbutton">CAPTURE</button>
-</body>
-<br>
-<div>
-  <p id="results">Results = 0</p>
-</div>
-<div>
-  <p id="Labelresults"></p>
-</div>
-
-
-<script type="text/javascript">
-
 // Connect to AWS
 var params = {
   SimilarityThreshold: 90,
   SourceImage: {
    S3Object: {
-    Bucket: "YOUR BUCKET NAME",
-    Name: "YOUR PHOTO NAME"
+    Bucket: "jj-rek2",
+    Name: "joe1.jpg"
    }
   },
   TargetImage: {
    S3Object: {
-     Bucket: "YOUR BUCKET NAME",
-     Name: "YOUR SECOND PHOTO NAME"
+     Bucket: "jj-rek2",
+     Name: "joe3.png"
    }
   }
  };
  var rekognition = new AWS.Rekognition({apiVersion: '2016-06-27',
-                                        accessKeyId: 'YOUR ACCESS KEY ID',
-                                        secretAccessKey: 'SECRET ACCESS KEY',
-                                        region: 'YOUR REGION'
+                                        accessKeyId: myAccessKeyId,
+                                        secretAccessKey: mySecretAccessKey, // these variables come from secrets.js
+                                        region: myRegion
                                       });
  rekognition.compareFaces(params, function(err, data) {
    if (err)
@@ -63,7 +37,7 @@ var params = {
  var secondParams = {
   Image: {
    S3Object: {
-     Bucket: "YOUR BUCKET NAME",
+     Bucket: "YOUR S3 BUCKET NAME",
      Name: "YOUR PHOTO NAME"
    }
   }
@@ -83,32 +57,32 @@ var params = {
  var thirdParams = {
   Image: {
    S3Object: {
-     Bucket: "YOUR BUCKET NAME",
-     Name: "YOUR PHOTO NAME"
+     Bucket: "jj-rek2",
+     Name: "picture.jpg"
    }
   },
   MaxLabels: 123,
   MinConfidence: 70
  };
- rekognition.detectLabels(secondParams, function(err, data) {
-   if (err)
-   {
-     console.log(err, err.stack); // an error occurred
-   }
-   else
-   {
-     console.log(data);           // successful response
-     var test = data.Labels;
-     var string = '';
-     for(var i=0; i< test.length; i++)
-     {
-       string += test[i].Confidence+" "+test[i].Name+"<br>";
-       console.log(test[i].Confidence);
-       console.log(test[i].Name);
-     }
-     document.getElementById("Labelresults").innerHTML = string;
-   }
- });
+ // rekognition.detectLabels(secondParams, function(err, data) {
+ //   if (err)
+ //   {
+ //     console.log(err, err.stack); // an error occurred
+ //   }
+ //   else
+ //   {
+ //     console.log(data);           // successful response
+ //     var test = data.Labels;
+ //     var string = '';
+ //     for(var i=0; i< test.length; i++)
+ //     {
+ //       string += test[i].Confidence+" "+test[i].Name+"<br>";
+ //       console.log(test[i].Confidence);
+ //       console.log(test[i].Name);
+ //     }
+ //     document.getElementById("Labelresults").innerHTML = string;
+ //   }
+ // });
 
 // Capture Image, currently this isn't saving the image
 (function()
@@ -182,4 +156,3 @@ var params = {
   }, false);
 
 })();
-</script>
