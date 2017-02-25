@@ -21,9 +21,9 @@ See the [Security Credentials](http://aws.amazon.com/security-credentials) page 
 
 This creates a secrets.js file. Enter your access key, secret access key, and region. Separate keys out and keep them safe .gitignore. It will look like this:
 
-	const myAccessKeyId = 'YOUR_ACCESS_KEY';
+	const myAccessKeyId     = 'YOUR_ACCESS_KEY';
 	const mySecretAccessKey = 'YOUR_SECRET_ACCESS_KEY';
-	const myRegion = 'YOUR_REGION';
+	const myRegion          = 'YOUR_REGION';
 
 The region here should be the same as your S3 bucket.
 
@@ -35,10 +35,11 @@ Create an S3 bucket. Upload a couple pictures of yourself. Check out the [S3](ht
 
 Update the variables at the top of rek.js with your own S3 bucket and 
 
-	const yourS3Bucket           = 'jj-rek2';
-	const yourSourceImageName    = 'joe1.jpg';
-	const yourTargetImageName    = 'joe2.jpg';
-	
+	const yourS3Bucket           = 'YOUR_S3_BUCKET';
+	const yourSourceImageName    = 'YOUR_FIRST_FACE_IMAGE.jpg';
+	const yourTargetImageName    = 'YOUR_SECOND_FACE_IMAGE.jpg';
+	const yourImageForLabelsName = 'YOUR_PICTURE_FOR_LABELS.jpg';
+
 	var params = {
 	  SimilarityThreshold: 90,
 	  SourceImage: {
@@ -61,3 +62,9 @@ Update the variables at the top of rek.js with your own S3 bucket and
 	open index.html
 
 Currently, this website uses [Amazon Rekognition](https://aws.amazon.com/rekognition/) to look at 2 pictures in [Amazon Simple Storage Service (S3)](http://aws.amazon.com/s3), then compares if they are similar.
+
+## Current functions
+
+1. Capture image - you can capture, but it's not wired to AWS
+2. Match 2 Existing Faces - get a similarity %
+3. Detect what's in a picture - get labels and confidence %
