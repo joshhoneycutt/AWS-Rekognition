@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>AWS Rekognition</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.20.min.js"></script>
+</head>
+
+<body>
+	<h1>Fun with AWS Rekognition</h1>
+
+	<h3>Face Validation</h3>
+	<p>Take a picture. Match it to an existing picture. (not working yet)</p>
+
+	<video id="video"></video>
+	<canvas id="canvas" style="display:none;"></canvas>
+	<div id="buttoncontent"></div>
+	<button id="startbutton">Capture Images</button>
+	
+	<hr>
+
+	<h3>Match 2 Existing Faces</h3>
+	<p>Compare two existing face images on S3.</p>
+
+	<div>
+		<img id="sourceImage" height="200" src="http://placehold.it/200x200?text=face+1">
+		<img id="targetImage" height="200" src="http://placehold.it/200x200?text=face+2">
+	</div>
+
+	<button id="comparebutton" onclick="compareFaces();">Compare Faces</button>
+
+	<br>
+
+	<div>
+		<p id="results">Results = ??</p>
+	</div>
+
+	<hr>
+
+	<h3>Detect what's in a picture</h3>
+	<p>Show labels and confidence of a picture in S3.</p>
+
+	<div>
+		<img id="imageForLabelsName" height="200" src="http://placehold.it/400x200?text=labels+pic">
+	</div>
+
+	<div>
+		<p id="Labelresults"></p>
+	</div>
+
+	<button id="comparebutton" onclick="detectPictureLabels();">Detect Labels</button>
+
+	<script src="secrets.js"></script>
+	<script src="rek.js"></script>
+</body>
+
+</html>
