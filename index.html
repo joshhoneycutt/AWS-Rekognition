@@ -4,9 +4,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AWS Rekognition</title>
-	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+
+	<!-- css -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="css/w3.css">
+	<link rel="stylesheet" href="css/styles.css">
+
+	<!-- javascript -->
 	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.20.min.js"></script>
 </head>
 
@@ -175,8 +179,18 @@
 	<!-- End page content -->
 	</div>
 
-	<script src="secrets.js"></script>
-	<script src="rek.js"></script>
+	<!-- variables -->
+	<script src="js/secrets.js"        ></script>
+	<script src="js/variables.js"      ></script>
+
+	<!-- individual scripts for each rekognition function -->
+	<script src="js/faceComparison.js" ></script>
+	<script src="js/faceAnalysis.js"   ></script>
+	<script src="js/faceValidation.js" ></script>
+	<script src="js/labelDetection.js" ></script>
+
+	<!-- webcam -->
+	<script src="js/camera.js"         ></script>
 
 	<script>
 		// Script to open and close sidenav
@@ -189,6 +203,6 @@
 		    document.getElementById("myOverlay").style.display = "none";
 		}
 	</script>
-	
+
 </body>
 </html>
