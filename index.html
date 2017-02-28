@@ -1,58 +1,224 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AWS Rekognition</title>
-	<link rel="stylesheet" href="styles.css">
+
+	<!-- css -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="css/styles.css">
+
+	<!-- javascript -->
 	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.20.min.js"></script>
 </head>
 
 <body>
-	<h1>Fun with AWS Rekognition</h1>
 
-	<h3>Face Validation</h3>
-	<p>Take a picture. Match it to an existing picture. (not working yet)</p>
+	<!-- Sidenav/menu -->
+	<nav class="w3-sidenav w3-black w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidenav"><br>
+	  <a href="javascript:void(0)" onclick="w3_close()" class="w3-padding-xlarge w3-hide-large w3-display-topleft w3-hover-white" style="width:100%;font-size:22px">Close Menu</a>
+	  <div class="w3-container">
+	    <h3 class="w3-padding-64">AWS<br>Rekognition<br>Samples</h3>
+	  </div>
+	  <a href="#"                onclick="w3_close()" class="w3-padding w3-hover-white">Home</a>
+	  <a href="#face-comparison" onclick="w3_close()" class="w3-padding w3-hover-white">Face comparison</a>
+	  <a href="#face-analysis"   onclick="w3_close()" class="w3-padding w3-hover-white">Face analysis</a>
+		<a href="#face-validation" onclick="w3_close()" class="w3-padding w3-hover-white">Face validation</a>
+		<a href="#label-detection" onclick="w3_close()" class="w3-padding w3-hover-white">Label detection</a>
+	</nav>
 
-	<video id="video"></video>
-	<canvas id="canvas" style="display:none;"></canvas>
-	<div id="buttoncontent"></div>
-	<button id="startbutton">Capture Images</button>
-	
-	<hr>
 
-	<h3>Match 2 Existing Faces</h3>
-	<p>Compare two existing face images on S3.</p>
 
-	<div>
-		<img id="sourceImage" height="200" src="http://placehold.it/200x200?text=face+1">
-		<img id="targetImage" height="200" src="http://placehold.it/200x200?text=face+2">
+	<!-- Top menu on small screens -->
+	<header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding">
+	  <a href="javascript:void(0)" class="w3-button w3-black w3-margin-right" onclick="w3_open()">&#9776;</a>
+	  <span>AWS Rekognition Samples</span>
+	</header>
+
+
+
+	<!-- Overlay effect when opening sidenav on small screens -->
+	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+
+
+	<!-- !PAGE CONTENT! -->
+	<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+
+
+		<!-- Face comparison -->
+	  <div class="w3-container" style="margin-top:80px" id="face-comparison">
+	    <h1 class="w3-jumbo w3-padding-48"><b>AWS Rekognition Samples</b></h1>
+	    <h1 class="w3-xxxlarge w3-text-black"><b>Face comparison</b></h1>
+	    <hr style="width:50px;border:5px solid black" class="w3-round">
+			<p>Compare two existing face images on S3</p>
+	  </div>
+
+	  <div class="w3-row-padding">
+	    <div class="w3-half">
+				<img id="sourceImage" style="width:100%" alt="Source Image" src="http://placehold.it/400x400?text=face+1">
+	    </div>
+	    <div class="w3-half">
+				<img id="targetImage" style="width:100%" alt="Target Image" src="http://placehold.it/400x400?text=face+2">
+	    </div>
+		</div>
+
+		<div class="w3-row-padding">
+			<div class="w3-rest w3-center w3-margin-top">
+				<button id="comparebutton" class="w3-button w3-black w3-xxxlarge" onclick="compareFaces();">Compare Faces</button>
+				<br>
+				<div>
+					<h1 id="results">Results = ??</h1>
+				</div>
+	  	</div>
+		</div>
+
+
+
+		<!-- Face analysis -->
+	  <div class="w3-container" id="face-analysis" style="margin-top:75px">
+	    <h1 class="w3-xxxlarge w3-text-black"><b>Face analysis</b></h1>
+	    <hr style="width:50px;border:5px solid black" class="w3-round">
+			<p>Analyze a face and get an emotion (not working yet)</p>
+	  </div>
+
+		<div class="w3-row-padding">
+	    <div class="w3-half">
+				<img id="sourceImageForAnalysis" style="width:100%" alt="Face to analyze" src="http://placehold.it/400x400?text=Face+to+analyze">
+	    </div>
+	    <div class="w3-half">
+				<!-- <img id="imageAnalysisResults" style="width:100%" alt="Face analysis results" src="http://placehold.it/400x400?text=face+results"> -->
+				<h3>face results</h3>
+				<div id="analyzeFaceResults"></div>
+	    </div>
+		</div>
+
+		<div class="w3-row-padding">
+			<div class="w3-rest w3-center w3-margin-top">
+				<button id="analyzeButton" class="w3-button w3-black w3-xxxlarge" onclick="analyzeFace();">Analyze Face</button>
+	  	</div>
+		</div>
+
+
+
+		<!-- Face validation -->
+		<div class="w3-container" id="face-validation" style="margin-top:75px">
+			<h1 class="w3-xxxlarge w3-text-black"><b>Face Validation</b></h1>
+			<hr style="width:50px;border:5px solid black" class="w3-round">
+			<p>Take a picture. Match it to an existing picture. (not working yet)</p>
+		</div>
+
+		<div class="w3-row-padding">
+			<div class="w3-col m4 w3-margin-bottom">
+				<div class="camera">
+					<video id="video">Video stream not available.</video>
+					<!-- <button id="startbutton">Take photo</button> -->
+				</div>
+				<canvas id="canvas"></canvas>
+				<div class="w3-container w3-center">
+					<h3>Video</h3>
+				</div>
+			</div>
+			<div class="w3-col m4 w3-margin-bottom">
+				<!-- <img src="http://placehold.it/400x400?text=captured+pic" alt="Captured Picture" style="width:100%"> -->
+				<div class="output">
+					<img id="photo" alt="The video capture will appear in this box.">
+				</div>
+				<div class="w3-container w3-center">
+					<h3>Capture</h3>
+				</div>
+			</div>
+			<div class="w3-col m4 w3-margin-bottom">
+				<img src="http://placehold.it/400x400?text=pic+on+file" alt="Picture on file" style="width:100%">
+				<div class="w3-container w3-center">
+					<h3>Results</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-row-padding">
+			<div class="w3-rest w3-center w3-margin-top">
+				<div id="buttoncontent"></div>
+				<button id="startbutton" class="w3-button w3-black w3-xxxlarge">Capture Image</button>
+			</div>
+		</div>
+
+		<div class="w3-row-padding">
+			<div class="w3-rest w3-center w3-margin-top">
+
+
+			</div>
+		</div>
+
+
+
+		<!-- Label detection -->
+	  <div class="w3-container" id="label-detection" style="margin-top:75px">
+			<h1 class="w3-xxxlarge w3-text-black"><b>Label detection</b></h1>
+	    <hr style="width:50px;border:5px solid black" class="w3-round">
+			<p>Show labels and confidence of a picture in S3</p>
+		</div>
+
+		<div class="w3-row-padding">
+			<div class="w3-half">
+				<div>
+					<img id="imageForLabelsName" style="width:100%" alt="Image for Labels" src="http://placehold.it/400x400?text=labels+pic">
+				</div>
+			</div>
+			<div class="w3-half">
+				<div>
+					<h3>label results</h3>
+					<p id="Labelresults">
+						<!-- <span id="exampleLabels"><ul><li>Label 1 - 99.30%</li><li>Label 2 - 99.30%</li><li>Label 3 - 99.30%</li><li>Label 4 - 88.90%</li><li>Label 5 - 88.90%</li><li>etc...</li></ul></span> -->
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="w3-row-padding">
+			<div class="w3-rest w3-center w3-margin-top">
+				<button id="comparebutton" class="w3-button w3-black w3-xxxlarge" onclick="detectPictureLabels();">Detect Labels</button>
+			</div>
+		</div>
+
+
+
+		<!-- Footer -->
+		<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;">
+			<p class="w3-center">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p>
+		</div>
+
+
+
+	<!-- End page content -->
 	</div>
 
-	<button id="comparebutton" onclick="compareFaces();">Compare Faces</button>
+	<!-- variables -->
+	<script src="js/secrets.js"        ></script>
+	<script src="js/variables.js"      ></script>
 
-	<br>
+	<!-- individual scripts for each rekognition function -->
+	<script src="js/faceComparison.js" ></script>
+	<script src="js/faceAnalysis.js"   ></script>
+	<script src="js/faceValidation.js" ></script>
+	<script src="js/labelDetection.js" ></script>
 
-	<div>
-		<p id="results">Results = ??</p>
-	</div>
+	<!-- webcam -->
+	<script src="js/camera.js"         ></script>
 
-	<hr>
+	// Script to open and close sidenav
+	<script>
+		function w3_open() {
+	    document.getElementById("mySidenav").style.display = "block";
+	    document.getElementById("myOverlay").style.display = "block";
+		}
+		function w3_close() {
+	    document.getElementById("mySidenav").style.display = "none";
+	    document.getElementById("myOverlay").style.display = "none";
+		}
+	</script>
 
-	<h3>Detect what's in a picture</h3>
-	<p>Show labels and confidence of a picture in S3.</p>
-
-	<div>
-		<img id="imageForLabelsName" height="200" src="http://placehold.it/400x200?text=labels+pic">
-	</div>
-
-	<div>
-		<p id="Labelresults"></p>
-	</div>
-
-	<button id="comparebutton" onclick="detectPictureLabels();">Detect Labels</button>
-
-	<script src="secrets.js"></script>
-	<script src="rek.js"></script>
 </body>
-
 </html>

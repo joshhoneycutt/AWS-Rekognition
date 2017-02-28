@@ -17,7 +17,7 @@ See the [Security Credentials](http://aws.amazon.com/security-credentials) page 
 
 ## Create a secrets.js file
 
-    touch secrets.js
+    touch js/secrets.js
 
 This creates a secrets.js file. Enter your access key, secret access key, and region. Separate keys out and keep them safe .gitignore. It will look like this:
 
@@ -33,31 +33,33 @@ Create an S3 bucket. Upload a couple pictures of yourself. Check out the [S3](ht
 
 ## Update S3 bucket and picture variables
 
-Update the variables at the top of rek.js with your own S3 bucket and 
+Update the variables in the js/variables.js file
 
 	const yourS3Bucket           = 'YOUR_S3_BUCKET';
 	const yourSourceImageName    = 'YOUR_FIRST_FACE_IMAGE.jpg';
 	const yourTargetImageName    = 'YOUR_SECOND_FACE_IMAGE.jpg';
 	const yourImageForLabelsName = 'YOUR_PICTURE_FOR_LABELS.jpg';
 
-	var params = {
-	  SimilarityThreshold: 90,
-	  SourceImage: {
-	   S3Object: {
-	    Bucket: yourS3Bucket,
-	    Name: yourSourceImageName
-	   }
-	  },
-	  TargetImage: {
-	   S3Object: {
-	     Bucket: yourS3Bucket,
-	     Name: yourTargetImageName
-	   }
-	  }
-	 };
+Update the parameter variables in faceComparison.js (or the other function files) with your own S3 bucket and images
+
+  var compareFaceParams = {
+    SimilarityThreshold: 90,
+    SourceImage: {
+     S3Object: {
+      Bucket: yourS3Bucket,
+      Name: yourSourceImageName
+     }
+    },
+    TargetImage: {
+     S3Object: {
+       Bucket: yourS3Bucket,
+       Name: yourTargetImageName
+     }
+    }
+   };
 
 
-## Run the code 
+## Run the code
 
 	open index.html
 
@@ -65,6 +67,7 @@ Currently, this website uses [Amazon Rekognition](https://aws.amazon.com/rekogni
 
 ## Current functions
 
-1. Capture image - you can capture, but it's not wired to AWS
-2. Match 2 Existing Faces - get a similarity %
-3. Detect what's in a picture - get labels and confidence %
+1. Face comparison - compare two pictures with faces and get a similarity %
+2. Face analysis   - get data about a single face picture (not working yet)
+3. Face validation - capture a picture with your webcam and get a validation (not working yet)
+4. Label detection - Detect what's in a picture - get labels and confidence %
