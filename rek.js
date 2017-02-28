@@ -1,19 +1,19 @@
 // hard coded variables for S3 bucket and pictures
 // make sure pictures are set to public
-const yourS3Bucket           = 'YOUR_S3_BUCKET';
-const yourSourceImageName    = 'YOUR_FIRST_FACE_IMAGE.jpg';
-const yourTargetImageName    = 'YOUR_SECOND_FACE_IMAGE.jpg';
-const yourImageForLabelsName = 'YOUR_PICTURE_FOR_LABELS.jpg';
- 
+const yourS3Bucket           = 'jj-rek2';
+const yourSourceImageName    = 'joe1.jpg';
+const yourTargetImageName    = 'joe2.jpg';
+const yourImageForLabelsName = 'picture.jpg';
+
 // set up rekognition credentials
 // these variables come from secrets.js
 const rekognition = new AWS.Rekognition({
   apiVersion: '2016-06-27',
   accessKeyId: myAccessKeyId,
-  secretAccessKey: mySecretAccessKey, 
+  secretAccessKey: mySecretAccessKey,
   region: myRegion
 });
- 
+
 // parameters for comparing two face images
 var params = {
   SimilarityThreshold: 90,
@@ -55,7 +55,7 @@ function compareFaces() {
 };
 
 // could be used for detect faces rekognition function
-// not yet working 
+// not yet working
 /*
  var secondParams = {
   Image: {
@@ -65,7 +65,7 @@ function compareFaces() {
    }
   }
  };
- 
+
  rekognition.detectFaces(secondParams, function(err, data) {
    if (err)
    {
@@ -78,7 +78,7 @@ function compareFaces() {
  });
 */
 
-// could be used for detect labels rekognition function 
+// could be used for detect labels rekognition function
 // not yet working
 
 // third set of parameters looking at a single picture in S3 for labels
@@ -126,7 +126,7 @@ function detectPictureLabels() {
 // Capture Image, currently this isn't saving the image or connected to AWS
 // the intent here is to use the camera to take a picture of yourself
 // then compare to an image S3
-// like a face validation :) 
+// like a face validation :)
 
 (function()
 {

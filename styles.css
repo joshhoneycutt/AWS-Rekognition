@@ -1,11 +1,15 @@
-* {
-	font-family: sans-serif;
+body, h1, h2, h3, h4, h5 {
+    font-family: "Inconsolata", sans-serif
 }
-
 body {
-	background-color: #bbbbbb;
+    font-size: 16px;
 }
-
-h3 {
-	margin-top: 40px;
+.w3-half img {
+    margin-bottom: -6px;
+    margin-top: 16px;
+    opacity: 0.8;
+    cursor: pointer
+}
+.w3-half img:hover {
+    opacity: 1
 }
