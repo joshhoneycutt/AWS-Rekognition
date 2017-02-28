@@ -1,9 +1,9 @@
 // hard coded variables for S3 bucket and pictures
 // make sure pictures are set to public
-const yourS3Bucket           = 'jj-rek2';
-const yourSourceImageName    = 'joe1.jpg';
-const yourTargetImageName    = 'joe2.jpg';
-const yourImageForLabelsName = 'picture.jpg';
+const yourS3Bucket           = 'YOUR_S3_BUCKET';
+const yourSourceImageName    = 'YOUR_FIRST_FACE_IMAGE.jpg';
+const yourTargetImageName    = 'YOUR_SECOND_FACE_IMAGE.jpg';
+const yourImageForLabelsName = 'YOUR_PICTURE_FOR_LABELS.jpg';
 
 // set up rekognition credentials
 // these variables come from secrets.js
