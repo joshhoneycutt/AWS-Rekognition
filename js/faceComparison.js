@@ -17,7 +17,7 @@ var compareFaceParams = {
 
 // compare two face images
 function compareFaces() {
- rekognition.compareFaces(compareFaceParams, function(err, data) {
+   rekognition.compareFaces(compareFaceParams, function(err, data) {
    if (err)
    {
      console.log(err, err.stack); // an error occurred

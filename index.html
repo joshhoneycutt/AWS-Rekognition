@@ -22,9 +22,9 @@
 	  <div class="w3-container">
 	    <h3 class="w3-padding-64">AWS<br>Rekognition<br>Samples</h3>
 	  </div>
-	  <a href="#" onclick="w3_close()" class="w3-padding w3-hover-white">Home</a>
+	  <a href="#"                onclick="w3_close()" class="w3-padding w3-hover-white">Home</a>
 	  <a href="#face-comparison" onclick="w3_close()" class="w3-padding w3-hover-white">Face comparison</a>
-	  <a href="#face-analysis" onclick="w3_close()" class="w3-padding w3-hover-white">Face analysis</a>
+	  <a href="#face-analysis"   onclick="w3_close()" class="w3-padding w3-hover-white">Face analysis</a>
 		<a href="#face-validation" onclick="w3_close()" class="w3-padding w3-hover-white">Face validation</a>
 		<a href="#label-detection" onclick="w3_close()" class="w3-padding w3-hover-white">Label detection</a>
 	</nav>
@@ -87,10 +87,12 @@
 
 		<div class="w3-row-padding">
 	    <div class="w3-half">
-				<img id="sourceImageAnalysis" style="width:100%" alt="Face to analyze" src="http://placehold.it/400x400?text=Face+to+analyze">
+				<img id="sourceImageForAnalysis" style="width:100%" alt="Face to analyze" src="http://placehold.it/400x400?text=Face+to+analyze">
 	    </div>
 	    <div class="w3-half">
-				<img id="imageAnalysisResults" style="width:100%" alt="Face analysis results" src="http://placehold.it/400x400?text=face+results">
+				<!-- <img id="imageAnalysisResults" style="width:100%" alt="Face analysis results" src="http://placehold.it/400x400?text=face+results"> -->
+				<h3>face results</h3>
+				<div id="analyzeFaceResults"></div>
 	    </div>
 		</div>
 
@@ -155,6 +157,7 @@
 			</div>
 			<div class="w3-half">
 				<div>
+					<h3>label results</h3>
 					<p id="Labelresults">
 						<!-- <span id="exampleLabels"><ul><li>Label 1 - 99.30%</li><li>Label 2 - 99.30%</li><li>Label 3 - 99.30%</li><li>Label 4 - 88.90%</li><li>Label 5 - 88.90%</li><li>etc...</li></ul></span> -->
 					</p>
@@ -192,15 +195,15 @@
 	<!-- webcam -->
 	<script src="js/camera.js"         ></script>
 
+	// Script to open and close sidenav
 	<script>
-		// Script to open and close sidenav
 		function w3_open() {
-		    document.getElementById("mySidenav").style.display = "block";
-		    document.getElementById("myOverlay").style.display = "block";
+	    document.getElementById("mySidenav").style.display = "block";
+	    document.getElementById("myOverlay").style.display = "block";
 		}
 		function w3_close() {
-		    document.getElementById("mySidenav").style.display = "none";
-		    document.getElementById("myOverlay").style.display = "none";
+	    document.getElementById("mySidenav").style.display = "none";
+	    document.getElementById("myOverlay").style.display = "none";
 		}
 	</script>
 
