@@ -113,21 +113,27 @@
 
 		<div class="w3-row-padding">
 			<div class="w3-col m4 w3-margin-bottom">
-				<video id="video"></video>
-				<canvas id="canvas" style="display:none"></canvas>
-				<div class="w3-container">
+				<div class="camera">
+					<video id="video">Video stream not available.</video>
+					<!-- <button id="startbutton">Take photo</button> -->
+				</div>
+				<canvas id="canvas"></canvas>
+				<div class="w3-container w3-center">
 					<h3>Video</h3>
 				</div>
 			</div>
 			<div class="w3-col m4 w3-margin-bottom">
-				<img src="http://placehold.it/400x400?text=captured+pic" alt="Captured Picture" style="width:100%">
-				<div class="w3-container">
+				<!-- <img src="http://placehold.it/400x400?text=captured+pic" alt="Captured Picture" style="width:100%"> -->
+				<div class="output">
+					<img id="photo" alt="The video capture will appear in this box.">
+				</div>
+				<div class="w3-container w3-center">
 					<h3>Capture</h3>
 				</div>
 			</div>
 			<div class="w3-col m4 w3-margin-bottom">
 				<img src="http://placehold.it/400x400?text=pic+on+file" alt="Picture on file" style="width:100%">
-				<div class="w3-container">
+				<div class="w3-container w3-center">
 					<h3>Results</h3>
 				</div>
 			</div>
@@ -136,7 +142,14 @@
 		<div class="w3-row-padding">
 			<div class="w3-rest w3-center w3-margin-top">
 				<div id="buttoncontent"></div>
-				<button id="startbutton" class="w3-button w3-black w3-xxxlarge">Capture Images</button>
+				<button id="startbutton" class="w3-button w3-black w3-xxxlarge">Capture Image</button>
+			</div>
+		</div>
+
+		<div class="w3-row-padding">
+			<div class="w3-rest w3-center w3-margin-top">
+
+
 			</div>
 		</div>
 
