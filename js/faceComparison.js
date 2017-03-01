@@ -25,7 +25,6 @@ function compareFaces() {
    else
    {
      console.log(data);           // successful response
-     console.log(data.FaceMatches);
      console.log(data.FaceMatches[0].Similarity);
      // display the face match similarity
      document.getElementById("results").innerHTML = "Results = "+data.FaceMatches[0].Similarity+'% Similar';
