@@ -19,8 +19,13 @@ function detectPictureLabels() {
    }
    else
    {
+     var region = '';
+     if(myRegion != 'us-east-1')
+     {
+       region = "-"+myRegion;
+     }
      // show the picture from S3 that you use to detect labels
-     document.getElementById("imageForLabelsName").src = "https://s3.amazonaws.com/" + detectLabelParams.Image.S3Object.Bucket + "/" + detectLabelParams.Image.S3Object.Name;
+     document.getElementById("imageForLabelsName").src = "https://s3"+region+".amazonaws.com/" + detectLabelParams.Image.S3Object.Bucket + "/" + detectLabelParams.Image.S3Object.Name;
      console.log(data);           // successful response
      // grab the labels and start the results
      var labels = data.Labels;

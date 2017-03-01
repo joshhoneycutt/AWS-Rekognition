@@ -31,8 +31,14 @@ function compareFaces() {
      document.getElementById("results").innerHTML = "Results = "+data.FaceMatches[0].Similarity+'% Similar';
      // show the source and target images
      // make sure pictures are set to public
-     document.getElementById("sourceImage").src = "https://s3.amazonaws.com/" + compareFaceParams.SourceImage.S3Object.Bucket + "/" + compareFaceParams.SourceImage.S3Object.Name;
-     document.getElementById("targetImage").src = "https://s3.amazonaws.com/" + compareFaceParams.TargetImage.S3Object.Bucket + "/" + compareFaceParams.TargetImage.S3Object.Name;
+     // check to see what region we are in, if we are not in 'us-east-1' then set region in URL generation
+     var region = '';
+     if(myRegion != 'us-east-1')
+     {
+       region = "-"+myRegion;
+     }
+     document.getElementById("sourceImage").src = "https://s3"+region+".amazonaws.com/" + compareFaceParams.SourceImage.S3Object.Bucket + "/" + compareFaceParams.SourceImage.S3Object.Name;
+     document.getElementById("targetImage").src = "https://s3"+region+".amazonaws.com/" + compareFaceParams.TargetImage.S3Object.Bucket + "/" + compareFaceParams.TargetImage.S3Object.Name;
    }
  });
 

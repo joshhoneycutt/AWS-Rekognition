@@ -21,8 +21,13 @@ function analyzeFace() {
     }
     else
     {
+      var region = '';
+      if(myRegion != 'us-east-1')
+      {
+        region = "-"+myRegion;
+      }
       // show the picture from S3 that you use to detect labels
-      document.getElementById("sourceImageForAnalysis").src = "https://s3.amazonaws.com/" + faceAnalysisParams.Image.S3Object.Bucket + "/" + faceAnalysisParams.Image.S3Object.Name;
+      document.getElementById("sourceImageForAnalysis").src = "https://s3"+region+".amazonaws.com/" + faceAnalysisParams.Image.S3Object.Bucket + "/" + faceAnalysisParams.Image.S3Object.Name;
       console.log(data);           // successful response
       console.log(data.FaceDetails[0].Emotions);
       // grab the emotions from the face
