@@ -3,7 +3,7 @@
   Image: {
    S3Object: {
      Bucket: yourS3Bucket,
-     Name: yourImageForLabelsName
+     Name: yourImageForFaceAnalysis
    }
   },
   Attributes: [

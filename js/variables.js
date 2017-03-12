@@ -4,6 +4,7 @@ const yourS3Bucket           = 'YOUR_S3_BUCKET';
 const yourSourceImageName    = 'YOUR_FIRST_FACE_IMAGE.jpg';
 const yourTargetImageName    = 'YOUR_SECOND_FACE_IMAGE.jpg';
 const yourImageForLabelsName = 'YOUR_PICTURE_FOR_LABELS.jpg';
+const yourImageForFaceAnalysis = 'YOUR_PICTURE_FOR_FACE_ANALYSIS.jpg';
 
 // set up rekognition credentials
 // these variables come from secrets.js
