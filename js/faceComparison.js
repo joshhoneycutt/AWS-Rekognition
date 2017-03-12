@@ -18,12 +18,9 @@ var compareFaceParams = {
 // compare two face images
 function compareFaces() {
    rekognition.compareFaces(compareFaceParams, function(err, data) {
-   if (err)
-   {
+   if (err) {
      console.log(err, err.stack); // an error occurred
-   }
-   else
-   {
+   } else {
      console.log(data);           // successful response
      console.log(data.FaceMatches[0].Similarity);
      // display the face match similarity
@@ -32,13 +29,11 @@ function compareFaces() {
      // make sure pictures are set to public
      // check to see what region we are in, if we are not in 'us-east-1' then set region in URL generation
      var region = '';
-     if(myRegion != 'us-east-1')
-     {
+     if(myRegion != 'us-east-1') {
        region = "-"+myRegion;
      }
      document.getElementById("sourceImage").src = "https://s3"+region+".amazonaws.com/" + compareFaceParams.SourceImage.S3Object.Bucket + "/" + compareFaceParams.SourceImage.S3Object.Name;
      document.getElementById("targetImage").src = "https://s3"+region+".amazonaws.com/" + compareFaceParams.TargetImage.S3Object.Bucket + "/" + compareFaceParams.TargetImage.S3Object.Name;
    }
  });
-
 };
